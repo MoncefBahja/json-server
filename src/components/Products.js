@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck ,faCircleXmark ,faDeleteLeft} from '@fortawesome/free-solid-svg-icons'
 
 import React, { useEffect, useState } from 'react'
-import { deleteProduct, getProducts } from '../api/server';
+import { deleteProduct, getProducts , checkedProduct } from '../api/server';
 
 export default function Products() {
 
@@ -16,7 +16,9 @@ const newProducts = products.filter(p=>p.id!==product.id)
      };
 
      const handeleProductchecked = (product)=> {
-        const newProducts = products.map((p) => {
+
+    checkedProduct(product).then((resp)=>{
+           const newProducts = products.map((p) => {
             if (p.id == product.id){
                 p.checked = !p.checked
             }
@@ -24,8 +26,8 @@ const newProducts = products.filter(p=>p.id!==product.id)
         }
     );
     setProducts(newProducts) ;
+    })
      } ;
-
 
      useEffect( () => { 
         hadeleGetProduct() ;

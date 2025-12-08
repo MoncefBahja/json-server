@@ -21,10 +21,10 @@ export const deleteProduct =(product)=> {
 }
 
 export const checkedProduct =(product)=> {
-    return apiProducts.patch(`/products`, {checked : !product.checked})
+    return apiProducts.patch(`/products/${product.id}`, {checked : !product.checked})
 }
 export const updateProduct =(product)=> {
-    return apiProducts.patch(`/products`,product)
+    return apiProducts.patch(`/products/${product.id}`,product)
 }
 
 

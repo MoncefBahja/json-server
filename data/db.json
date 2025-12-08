@@ -10,13 +10,19 @@
       "id": "3",
       "name": "pro3",
       "price": 3000,
+      "checked": true
+    },
+    {
+      "id": "c74c",
+      "name": "pro9",
+      "price": 222,
       "checked": false
     },
     {
-      "id": "4",
-      "name": "pro4",
-      "price": 4000,
-      "checked": true
+      "id": "01dd",
+      "name": "comp",
+      "price": 3000,
+      "checked": "on"
     }
   ]
 }
