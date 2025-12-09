@@ -4,9 +4,10 @@ export const apiProducts = axios.create({
     baseURL: 'http://localhost:9000'
 })
 
-export const getProducts =()=> {
-    return apiProducts.get('/products')
-}
+export const getProducts = (page = 1, keyword = "", size = 4) => {
+  return apiProducts.get(`/products?_page=${page}&_limit=${size}`);
+};
+
 
 export const getProductById =(id)=> {
     return apiProducts.get(`/products/${id}`)

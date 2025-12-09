@@ -1,28 +1,46 @@
 {
   "products": [
     {
-      "id": "2",
+      "id": 1,
       "name": "pro2",
       "price": 2000,
       "checked": true
     },
     {
-      "id": "3",
+      "id": 2,
       "name": "pro3",
       "price": 3000,
       "checked": true
     },
     {
-      "id": "c74c",
+      "id": 3,
       "name": "pro9",
       "price": 222,
       "checked": false
     },
     {
-      "id": "01dd",
-      "name": "comp",
-      "price": 3000,
+      "id": 4,
+      "name": "TAN",
+      "price": 987,
       "checked": "on"
+    },
+    {
+      "id": 5,
+      "name": "ok",
+      "price": 6000,
+      "checked": false
+    },
+    {
+      "id": 6,
+      "name": "sss",
+      "price": 11,
+      "checked": true
+    },
+    {
+      "id": 7,
+      "name": "W",
+      "price": 222,
+      "checked": false
     }
   ]
 }

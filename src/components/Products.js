@@ -1,47 +1,71 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck ,faCircleXmark ,faDeleteLeft} from '@fortawesome/free-solid-svg-icons'
-
 import React, { useEffect, useState } from 'react'
 import { deleteProduct, getProducts , checkedProduct } from '../api/server';
 
 export default function Products() {
 
-     const [products , setProducts]= useState ([]) ;
+     const [state , setState]= useState ({
+      products : [] ,
+      currenetPage : 1 ,
+      pageSize : 4,
+      keyword: " " ,
+      totalPages: 0, 
+     }
+     ) ;
 
      const handeleProductdelete = (product) => {
         deleteProduct(product).then((resp) =>{
-const newProducts = products.filter(p=>p.id!==product.id)
-      setProducts(newProducts) ;        }) ;
-        
+const newProducts = state.products.filter(p=>p.id!==product.id)
+setState({...state, products: newProducts})
+        })
      };
 
      const handeleProductchecked = (product)=> {
-
     checkedProduct(product).then((resp)=>{
-           const newProducts = products.map((p) => {
+           const newProducts = state.products.map((p) => {
             if (p.id == product.id){
                 p.checked = !p.checked
             }
             return p ;
         }
     );
-    setProducts(newProducts) ;
+          setState({...state, products: newProducts})
     })
      } ;
+const hadeleGoPage = (page) => {
+  setState(prevState => {
+    hadeleGetProduct(page, prevState.keyword, prevState.pageSize);
+    return prevState;
+  });
+}
+
 
      useEffect( () => { 
-        hadeleGetProduct() ;
+        hadeleGetProduct(state.currenetPage,state.keyword,state.pageSize) ;
      }
      ,[])
 
-    const  hadeleGetProduct = () => {
-        getProducts().then (resp => {
-          setProducts(resp.data)
-        })
-        .catch ((err)=>{
-          console.log (err) 
-        });
-    }
+
+   const hadeleGetProduct = (currentPage, keyword, pageSize) => {
+  getProducts(currentPage, keyword, pageSize).then(resp => {
+    const totalElements = parseInt(resp.headers["x-total-count"]);
+    let totalPages = Math.floor(totalElements / pageSize);
+    if (totalElements % pageSize != 0) ++totalPages;
+    
+    setState({
+      products: resp.data,
+      currenetPage: currentPage,
+      pageSize: pageSize,
+      keyword: keyword,
+      totalPages: totalPages,
+    });
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+  console.log("Request page:", currentPage, "keyword:", keyword, "pageSize:", pageSize);
+}
 
   return (
 
@@ -64,7 +88,7 @@ const newProducts = products.filter(p=>p.id!==product.id)
           </thead>
 
           <tbody>
-            {products.map((product) => (
+            {state.products.map((product) => (
               <tr key={product.id}>
                 <td>{product.id}</td>
                 <td>{product.name}</td>
@@ -95,6 +119,23 @@ const newProducts = products.filter(p=>p.id!==product.id)
             ))}
           </tbody>
         </table>
+         <ul className="nav nav-pills">
+          {
+            new Array (state.totalPages).fill(0).map((v,index)=>(
+              <li>
+               <button 
+  onClick={() => hadeleGoPage(index + 1)} 
+  className={`btn ms-1 ${state.currenetPage === index + 1 ? 'btn-info' : 'btn-outline-info'}`}
+>
+  {index + 1}
+</button>
+                  
+              </li>
+            ))
+          }
+
+  </ul>  
+  
       </div>
 
     </div>
