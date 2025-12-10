@@ -1,18 +1,16 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck ,faCircleXmark ,faDeleteLeft} from '@fortawesome/free-solid-svg-icons'
-import React, { useEffect, useState } from 'react'
-import { deleteProduct, getProducts , checkedProduct } from '../api/server';
+import React, { useEffect ,useContext } from 'react'
+import { deleteProduct, getProducts , checkedProduct ,AppContext} from '../api/server';
 
 export default function Products() {
 
-     const [state , setState]= useState ({
-      products : [] ,
-      currenetPage : 1 ,
-      pageSize : 4,
-      keyword: " " ,
-      totalPages: 0, 
-     }
-     ) ;
+
+  
+  const [state , setState] = useContext(AppContext) ;
+
+   
+  
 
      const handeleProductdelete = (product) => {
         deleteProduct(product).then((resp) =>{

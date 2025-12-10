@@ -10,19 +10,13 @@
       "id": 2,
       "name": "pro3",
       "price": 3000,
-      "checked": true
+      "checked": false
     },
     {
       "id": 3,
       "name": "pro9",
       "price": 222,
       "checked": false
-    },
-    {
-      "id": 4,
-      "name": "TAN",
-      "price": 987,
-      "checked": "on"
     },
     {
       "id": 5,
@@ -41,6 +35,24 @@
       "name": "W",
       "price": 222,
       "checked": false
+    },
+    {
+      "name": "RRR",
+      "price": 111,
+      "checked": "on",
+      "id": 9
+    },
+    {
+      "name": "ok",
+      "price": 99,
+      "checked": "on",
+      "id": 10
+    },
+    {
+      "name": "tan",
+      "price": 111,
+      "checked": false,
+      "id": 11
     }
   ]
 }
